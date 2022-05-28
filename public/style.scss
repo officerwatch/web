@@ -1,6 +1,10 @@
-@charset "utf-8";
-@import "../node_modules/bulma/bulma.sass";
+// bulma style library
+@use "../node_modules/bulma/bulma.sass";
 
+// components
+@use "styles/components/searchbox";
+
+// global styling
 body {
-    background-color: #F00;
+    background-color: #FFF;
 }

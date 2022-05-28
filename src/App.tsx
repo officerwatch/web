@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Outlet, Link } from "react-router-dom";
+import SearchBox from "./components/searchbox";
 
 function App() {
   return (
@@ -9,6 +10,9 @@ function App() {
         <div className="navbar-brand">
           <span className="navbar-item">
             <strong>Officer Watch</strong>
+          </span>
+          <span className="navbar-item">
+            <SearchBox />
           </span>
 
           <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

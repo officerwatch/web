@@ -10349,6 +10349,14 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding: 3rem 1.5rem 6rem;
 }
 
+.searchActive {
+  background-color: #000;
+}
+
+.searchClosed {
+  background-color: #FF0;
+}
+
 body {
   background-color: #FFF;
 }
