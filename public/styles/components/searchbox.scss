@@ -1,6 +1,26 @@
+.searchInput {
+    height: 50px;
+    line-height: 50px;
+    outline: none;
+    border: 1px solid #efefef;
+}
+
+.searchInput:focus {
+    outline: none;
+    border: 1px solid #efefef;
+}
+
 .searchActive {
-    background-color: #000;
+    position: absolute;
+    top: 50px;
+    left: 9px;
+    width: 280px;
+    padding: 0.5rem 0.75rem;
+    margin-left: 3px;
+    background-color: #FFF;
+    border: 1px solid #efefef;
+    border-top: none;
 }
 .searchClosed {
-    background-color: #FF0;
+    display: none;
 }

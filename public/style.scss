@@ -8,3 +8,19 @@
 body {
     background-color: #FFF;
 }
+
+*:focus {
+    outline: none;
+    border: 1px solid #efefef;
+    box-shadow: none;
+    border-color: none;
+}
+
+.footer {
+    background-color: #f3f3f3;
+    padding: 1rem 1rem 1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
