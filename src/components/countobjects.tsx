@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../db";
 

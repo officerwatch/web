@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useStore } from "../appState";
 import SearchAutoComplete from "./searchautocomplete";
 
 function SearchBox () {
 
-    // menu state
-    const [menuOpen, setMenuOpen] = useState(false);
+    // menu open/closed state
+    const menuStatus = useStore(state => state.uiSearchSuggest);
+    const menuToggle = useStore(state => state.uimodSearchToggle);
 
     // search box content
     const [searchTerm, setSearchTerm] = useState("");
@@ -14,12 +16,8 @@ function SearchBox () {
             <p className="control has-icons-left">
             <input className="input is-medium searchInput" type="text" value={searchTerm}
                 placeholder="Search Database"
-                onFocus={() => 
-                    setMenuOpen(true)
-                }
-                onBlur={() => 
-                    setMenuOpen(false)
-                }
+                onFocus={menuToggle}
+                onBlur={menuToggle}
                 onChange={(e) => 
                     setSearchTerm(e.target.value)
                 }
@@ -29,7 +27,7 @@ function SearchBox () {
             </span>
             </p>
 
-            {menuOpen ? (
+            {menuStatus ? (
                 <div className="searchActive">
                     <SearchAutoComplete term={ searchTerm } />
                 </div>

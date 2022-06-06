@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { CountOfficers, CountDocuments } from "./countobjects";
 
 function Footer () {

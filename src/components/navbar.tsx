@@ -1,5 +1,6 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchBox from "./searchbox";
+import SignInStatus from "./signinstatus";
 
 function NavBar () {
     return (
@@ -45,11 +46,7 @@ function NavBar () {
               </div>
             </div>
             <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-primary">
-                  <strong>Sign In</strong>
-                </a>
-              </div>
+              <SignInStatus />
             </div>
           </div>
         </div>
