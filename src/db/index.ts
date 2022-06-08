@@ -8,8 +8,8 @@ class OfficerWatchDB extends Dexie {
   
     constructor() {
       super("db");
-      this.version(1).stores({
-        officer: `++id, name, age, race, agency, title, photo, tags, updated`,
+      this.version(1.1).stores({
+        officer: `++id, name, age, race, agency, title, photo, tags, ipfsHash, parent, children, updated`,
         documents: `++id, name, description`
       });
     }

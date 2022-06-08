@@ -1,4 +1,5 @@
 import create from 'zustand'
+import { appInit } from "./appInit" 
 
 interface appState {
 
@@ -8,6 +9,7 @@ interface appState {
 
     // core
     coreVersion: string
+    coreAppInit: boolean
 
     // site ui
     uiTheme: string
@@ -29,6 +31,9 @@ interface appState {
     // ***
     // state modifiers
     // ***
+    
+    // core
+    coreInitToggle: () => void
 
     // ui
     uimodSearchToggle: () => void
@@ -57,6 +62,7 @@ export const useStore = create<appState>()((set) => ({
 
     // core
     coreVersion: "1.2.3",
+    coreAppInit: false,
 
     // ui
     uiTheme: "light",
@@ -78,6 +84,9 @@ export const useStore = create<appState>()((set) => ({
     // ***
     // state modifiers
     // ***
+
+    // core
+    coreInitToggle: () => set((state) => ({ coreAppInit: (state.coreAppInit ? false : true) })),
 
     // ui
     uimodSearchToggle: () => set((state) => ({ uiSearchSuggest: (state.uiSearchSuggest ? false : true) })),

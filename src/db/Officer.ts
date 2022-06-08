@@ -7,5 +7,8 @@ export interface Officer {
     title: string;
     photo: string;
     tags: string;
+    ipfsHash: string
+    parent: string
+    children: string
     updated: string;
   }
