@@ -1,5 +1,4 @@
 import create from 'zustand'
-import { appInit } from "./appInit" 
 
 interface appState {
 
@@ -86,11 +85,16 @@ export const useStore = create<appState>()((set) => ({
     // ***
 
     // core
-    coreInitToggle: () => set((state) => ({ coreAppInit: (state.coreAppInit ? false : true) })),
+    coreInitToggle: () => set((state) => ({ 
+        coreAppInit: (state.coreAppInit ? false : true) 
+    })),
 
     // ui
     uimodSearchToggle: () => set((state) => ({ uiSearchSuggest: (state.uiSearchSuggest ? false : true) })),
     uimodFooterToggle: () => set((state) => ({ uiFooterMenu: (state.uiFooterMenu ? false : true) })),
     uimodMoreMenuToggle: () => set((state) => ({ uiMenuMore: (state.uiMenuMore ? false : true) })),
     uimodSidebarToggle: () => set((state) => ({ uiSidebar: (state.uiSidebar ? false : true) }))
+
+    // web3
+
 }))
