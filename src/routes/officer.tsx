@@ -42,7 +42,7 @@ function Officer () {
         if (pid) {
             // check to see if object is valid
             check(pid).then(function (result) {
-                if (result == 1) {
+                if (result === 1) {
                     setObjLoad((objLoad) => true);
                 }
             });
@@ -57,7 +57,7 @@ function Officer () {
             console.log('provided id: ' + pid);
             // TODO: display no officer found error message
         }
-    }, []);
+    }, [pid]);
 
     return (
         <main>

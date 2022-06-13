@@ -1,4 +1,3 @@
-import OfficerHeader from "./header";
 function OfficerPage (data: any) {
     let obj = data.data;
     obj.badge = "";
@@ -9,36 +8,36 @@ function OfficerPage (data: any) {
                 <div className="media">
                     <div className="media-left">
                         <figure className="image is-96x96">
-                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" />
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder" />
                         </figure>
                     </div>
                     <div className="media-content">
                         <p className="title is-4" style={{marginBottom: '10px'}}>{obj.name}</p>
-                            {obj.agency != "" ? 
+                            {obj.agency !== "" ? 
                                 ( <span className="subtitle is-6">Agency: <strong>{obj.agency}</strong></span> ) 
                                 :
                                 ( <span className="subtitle is-6">Agency: <strong>Unknown</strong></span> ) 
                             }
                             <br />
-                            {obj.title != "" ? 
+                            {obj.title !== "" ? 
                                 ( <span className="subtitle is-6">Rank: <strong>{obj.title}</strong></span> ) 
                             :
                                 ( <span className="subtitle is-6">Rank: <strong>Unknown</strong></span> ) 
                             }
                             <br />
-                            {obj.race != "" ? 
+                            {obj.race !== "" ? 
                                 ( <span className="subtitle is-6">Race: <strong>{obj.race}</strong></span> ) 
                             :
                                 ( <span className="subtitle is-6">Race: <strong>Unknown</strong></span> ) 
                             }
                             <br />
-                            {obj.gender != "" ? 
+                            {obj.gender !== "" ? 
                                 ( <span className="subtitle is-6">Gender: <strong>{obj.gender}</strong></span> ) 
                             :
                                 ( <span className="subtitle is-6">Gender: <strong>Unknown</strong></span> ) 
                             }
                             <br />
-                            {obj.badge != "" ? 
+                            {obj.badge !== "" ? 
                                 ( <span className="subtitle is-6">Badge #: <strong>{obj.badge}</strong></span> ) 
                             :
                                 ( <span className="subtitle is-6">Badge #: <strong>Unknown</strong></span> ) 
