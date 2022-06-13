@@ -5,6 +5,8 @@ import Contribute from "./routes/contribute";
 import About from "./routes/about";
 import Contact from "./routes/contact";
 import Report from "./routes/report";
+import SearchPage from "./routes/searchpage";
+import Officer from "./routes/officer";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +19,9 @@ root.render(
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="report" element={<Report />} />
+          <Route path="officer">
+            <Route path=":pid" element={<Officer />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

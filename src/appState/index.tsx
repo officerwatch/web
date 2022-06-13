@@ -19,6 +19,7 @@ interface appState {
     uiSearchTerm: string
 
     // web 3
+    web3HasMetamask: boolean
     web3UserHash: string
     web3HasWallet: boolean
     web3CurrentNetwork: string
@@ -72,6 +73,7 @@ export const useStore = create<appState>()((set) => ({
     uiSearchTerm: "",
 
     // web3
+    web3HasMetamask: false,
     web3UserHash: "",
     web3ContractAddr: "",
     web3HasWallet: false,
@@ -93,8 +95,8 @@ export const useStore = create<appState>()((set) => ({
     uimodSearchToggle: () => set((state) => ({ uiSearchSuggest: (state.uiSearchSuggest ? false : true) })),
     uimodFooterToggle: () => set((state) => ({ uiFooterMenu: (state.uiFooterMenu ? false : true) })),
     uimodMoreMenuToggle: () => set((state) => ({ uiMenuMore: (state.uiMenuMore ? false : true) })),
-    uimodSidebarToggle: () => set((state) => ({ uiSidebar: (state.uiSidebar ? false : true) }))
+    uimodSidebarToggle: () => set((state) => ({ uiSidebar: (state.uiSidebar ? false : true) })),
 
     // web3
-
+    web3modInitialize: (status: boolean) => set((state) => ({ web3HasMetamask: status }))
 }))

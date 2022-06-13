@@ -2,19 +2,21 @@ import Dexie, { Table } from "dexie";
 import { Officer } from "./Officer";
 import { Document } from "./Document";
 import { Object } from "./Object";
-import { rejects } from "assert";
+import { IpfsCache } from "./IpfsCache";
 
 class OfficerWatchDB extends Dexie {
-    officer!: Table<Officer>;
+    officers!: Table<Officer>;
     documents!: Table<Document>;
     objects!: Table<Object>;
+    ipfscache!: Table<IpfsCache>;
   
     constructor() {
       super("db");
-      this.version(1.2).stores({
-        officer: `++id, name, age, race, agency, title, photo, tags, ipfsHash, parent, children, updated`,
+      this.version(1.5).stores({
+        officers: `++id, name, age, race, agency, title, photo, tags, ipfsHash, parent, children, updated`,
         documents: `++id, name, description`,
-        objects: `id, objType, name, ipfsHash, parent, children`
+        objects: `id, objType, name, ipfsHash, parent, children`,
+        ipfscache: `id, data`
       });
     }
   }
@@ -25,7 +27,13 @@ export const db = new OfficerWatchDB();
 export function stateClear () {
   return new Promise(resolve => {
     console.log('app state refreshed, offline storage cleared');
-    setTimeout(() => { resolve(db.objects.clear()) }, 500);
+    const returnStatus = async () => {
+      await db.objects.clear();
+      await db.officers.clear();
+      await db.documents.clear();
+      await db.ipfscache.clear();
+    }
+    resolve(returnStatus());
   });
 }
 
@@ -38,17 +46,60 @@ export function stateLoad (data: Object) {
   });
 }
 
+export function stateCachify () {
+  return new Promise((resolve, reject) => {
+    const ipfsCacheGrab = async () => {
+      try {
+        const responze = await fetch("https://graphql.officer.watch/graphql/", 
+                                { 
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                                  body: JSON.stringify({
+                                    query: `{ objectGetIpfs }`,
+                                    variables: {
+                                      now: new Date().toISOString(),
+                                    },
+                                  }),
+                                });
+        console.log();
+        return responze.json();
+      } catch (e) {
+        reject('data failed to load: '+ e);
+      }
+    }
+    resolve(ipfsCacheGrab());
+  });
+}
+
 export function stateMutate (data: Object) {
   return new Promise((resolve, reject) => {
-    try {
-      const ipfsData = async () => {
-        const response = await fetch("https://ipfs.officer.watch/ipfs/" + data.ipfsHash);
-        console.log(data.id +' ipfs object ' + data.ipfsHash + ' loaded into offline storage');
-        console.log(response);
+    const ipfsData = async () => {
+      try {
+        // TODO: add support for other objTypes
+        if (data.objType == "officer") {
+          let mutation = await db.officers.add({
+                                                id: data.id,
+                                                name: data.name,
+                                                age: 0,
+                                                race: "",
+                                                agency: "",
+                                                title: "",
+                                                photo: "",
+                                                tags: "",
+                                                ipfsHash: data.ipfsHash,
+                                                parent: data.parent,
+                                                children: data.children,
+                                                updated: ""
+                                              });
+        }
+        console.log(data.id + " placed into searchable index");
+        resolve ( true );
+      } catch (e) {
+        reject('data failed to load: '+ e);
       }
-      resolve(ipfsData());
-    } catch (e) {
-      reject('data failed to load: '+ e);
     }
+    resolve(ipfsData());
   });
 }

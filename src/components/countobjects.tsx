@@ -3,7 +3,7 @@ import { db } from "../db";
 
 export function CountOfficers () {
 
-    const officerCount = useLiveQuery(() => db.officer.count());
+    const officerCount = useLiveQuery(() => db.officers.count());
 
     return (
         <strong>{officerCount}</strong>
