@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStore } from "../appState";
 import SearchAutoComplete from "./searchautocomplete";
+import { AiOutlineFileSearch } from "react-icons/ai";
 
 function SearchBox () {
 
@@ -23,7 +24,7 @@ function SearchBox () {
                 }
             />
             <span className="icon is-small is-left">
-                <i className="fas fa-search"></i>
+                <AiOutlineFileSearch />
             </span>
             </p>
 

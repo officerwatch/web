@@ -4,11 +4,18 @@ import { useStore } from "./appState";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import { db, stateClear, stateLoad, stateMutate, stateCachify } from "./db";
+import * as web3 from "./appState/web3";
 
 function App() {
   // app initial data load state, false = not done yet
   const appInitStatus = useStore(state => state.coreAppInit);
   const appInitToggle = useStore(state => state.coreInitToggle);
+
+  // web3 state
+  const web3HasMetamask = useStore(state => state.web3HasMetamask);
+  const web3modInitialize = useStore(state => state.web3modInitialize);
+  const web3SetNetwork = useStore(state => state.web3modSetNetwork);
+  const web3SetChain = useStore(state => state.web3modSetChain);
 
   useEffect(() => {
     const appInitFetch = async () => {
@@ -78,7 +85,7 @@ function App() {
               "title": p[ch].title
             });
 
-            //console.log(dbStatus);
+            console.log(dbStatus);
         }
       }
     };
@@ -88,43 +95,65 @@ function App() {
     objCounter().then((response) => {
 
       // TODO: do a better check than "if not zero"
-      if (response == 0) {
+      if (response === 0) {
         // once init is complete, toggle ui state
         appInitFetch().then((response) => {
-            console.log('app initial state loaded');
+            console.log('App initial state loaded');
             appInitToggle();
         });
       } else {
-        console.log('app initial state loaded');
+        console.log('App initial state loaded');
         appInitToggle();
       }
     });
     
-
+    // web3 stuff
     if (window.ethereum) {
-      console.log("ethereum detected");
-      // Check if network is correct
-      //getNetworkAndChainId()
+      console.log("Ethereum detected");
+
+      if (window.ethereum.isMetaMask) {
+          web3modInitialize(true);
+          console.log('Metamask initialized');
+
+          // set current network into appState from metamask
+          web3.getNetworkId().then((response) => {
+            web3SetNetwork(response as string);
+            console.log('Detected EVM Network: ' + response);
+            return response;
+          });
+
+          // set current chainid into appState from metamask
+          web3.getChainId().then((response) => {
+            web3SetChain(response as string);
+            console.log('Detected EVM Chain: ' + response);
+            return response;
+          });
+
+        } else {
+            web3modInitialize(false);
+            console.log('Please install MetaMask!');
+        }
     } else {
-        console.log("ethereum NOT detected");
-        //  window.addEventListener('ethereum#initialized', handleEthereum, { once: true });
-
-      // If the event is not dispatched by the end of the timeout,
-      // the user probably doesn't have MetaMask installed.
-      //setTimeout(handleEthereum, 3000); // 3 seconds
+        web3modInitialize(false);
+        console.log("Ethereum NOT detected");
     }
-
   }, []);
+
+  const state = useStore();
+    console.log(state)
 
   return (
     <div>
-      <NavBar />
       {appInitStatus ? (
-          <Outlet />
-          ) : (
+          <>
+            <NavBar />
+              <div style={{ paddingTop: '4.5em' }}></div>
+            <Outlet />
+            <Footer />
+          </>
+           ) : (
           <span>loading dot gif</span>
       )}
-      <Footer />
     </div>
   );
 }

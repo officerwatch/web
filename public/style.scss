@@ -4,6 +4,8 @@
 // components
 @use "styles/components/searchbox";
 
+$input-focus-box-shadow-size: none;
+
 // global styling
 body {
     background-color: #FFF;
@@ -23,4 +25,10 @@ body {
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+.buttons {
+    display: inherit;
+    flex-wrap: unset;
+    justify-content: inherit;
 }

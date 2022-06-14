@@ -1,19 +1,50 @@
 import { CountOfficers, CountDocuments } from "./countobjects";
+import { useStore } from "../appState";
+import { FaUserCircle } from "react-icons/fa";
+import { BiCheckShield } from "react-icons/bi"
+import * as web3 from "../appState/web3";
+import SignInStatus from "./signinstatus";
 
 function Footer () {
+    const web3UserHash = useStore(state => state.web3UserHash);
+    const web3SetUserHash = useStore(state => state.web3modSetUserHash);
+
+    async function buttonAction () {
+        if (web3UserHash !== "") {
+            // user logged in
+            // initiate soft "sign out" process
+            web3SetUserHash("");
+            console.log('User disconnected');
+        } else {
+            // user not signed in
+            // initiate metamask call for user hash
+            try {
+                const userHash = await web3.connectWallet();
+                web3SetUserHash(userHash as string);
+                console.log('Sign in successful for user: ' + userHash);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
 
     return (
         <footer className="footer">
-            <div className="content has-text-centered is-small">
-                <span className="is-size-6"><strong>Officer Watch</strong> by <a href="https://linktr.ee/sundaybrunchclub" target="_new"><strong>Sunday Brunch Club</strong></a></span>
-                <br /><br />
+            <div className="columns">
+            <div className="column is-three-quarters is-hidden-mobile has-text-centered is-small">
                 <span className="is-size-6">tracking <CountOfficers /> officers, <strong>3</strong> agencies, <strong>39</strong> incidents,
                 <br />
                 <CountDocuments /> documents, <strong>934</strong> news articles, &amp; more.</span>
-                <br /><br />
-                version <a href="https://github.com/officerwatch" target="_new"><strong>0.1.23</strong></a>.
-                public data stored on <a href="https://polygonscan.com" target="_new"><strong>polygon</strong></a>.
-                ipfs <a href="ipfs://bafybeidcryjungx6qqtvcn53h5w3e4mnztrca64lrz4ab65jf5xy4f5q2u" target="_new"><strong>hash</strong></a>. 
+            </div>
+            <div className="column is-one-quarter is-full-mobile has-text-centered">
+                <div className="buttons" onClick={ buttonAction }>
+                    {web3UserHash !== "" ?
+                        (<a className="button is-primary is-small"><BiCheckShield />&nbsp;&nbsp;<strong>Signed In</strong></a>)
+                    :
+                        (<a className="button is-info is-small"><FaUserCircle />&nbsp;&nbsp;<strong>Volunteer Sign In</strong></a>)
+                    }
+                </div>
+            </div>
             </div>
         </footer>
     )

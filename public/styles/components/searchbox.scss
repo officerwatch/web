@@ -11,16 +11,34 @@
 }
 
 .searchActive {
-    position: absolute;
-    top: 50px;
-    left: 9px;
-    width: 280px;
+    position: relative;
+    width: auto;
     padding: 0.5rem 0.75rem;
-    margin-left: 3px;
+    margin-top: -5px;
     background-color: #FFF;
     border: 1px solid #efefef;
     border-top: none;
+    z-index: 5;
 }
+
 .searchClosed {
     display: none;
+}
+
+.navbar-brand, .navbar-item, .field {
+    width: 100%;
+}
+
+.navbar {
+    min-height: 3.25rem;
+    background-color: transparent;
+    position: absolute;
+    z-index: 30;
+    max-width: 600px;
+    width: 100%;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 280px;
 }
