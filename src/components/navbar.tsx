@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import SearchBox from "./searchbox";
-import SignInStatus from "./signinstatus";
 
 function NavBar () {
     return (

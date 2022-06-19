@@ -1,9 +1,9 @@
-function Contact () {
+function Intake () {
     return (
         <main style={{ padding: "1rem 0" }}>
-          <h2>Contact</h2>
+          <h2>Intake</h2>
         </main>
       );
 }
 
-export default Contact;
+export default Intake;

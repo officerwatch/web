@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useStore } from "../appState";
 import SearchAutoComplete from "./searchautocomplete";
 import { AiOutlineFileSearch } from "react-icons/ai";
@@ -18,7 +18,7 @@ function SearchBox () {
             <input className="input is-medium searchInput" type="text" value={searchTerm}
                 placeholder="Search Database"
                 onFocus={menuToggle}
-                onBlur={menuToggle}
+                //onBlur={menuToggle}
                 onChange={(e) => 
                     setSearchTerm(e.target.value)
                 }
@@ -29,7 +29,7 @@ function SearchBox () {
             </p>
 
             {menuStatus ? (
-                <div className="searchActive">
+                <div className="searchActive" onClick={(e) => e.preventDefault()}>
                     <SearchAutoComplete term={ searchTerm } />
                 </div>
                 ) : (

@@ -1,7 +1,14 @@
+import { useEffect } from "react";
+
 function OfficerPage (data: any) {
-    let obj = data.data;
+    var obj = data.data;
     obj.badge = "";
     obj.gender = "";
+    useEffect(() => {
+        let obj = data.data;
+        obj.badge = "";
+        obj.gender = "";
+    }, []);
     return (
         <div className="card" style={{width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
             <div className="card-content">

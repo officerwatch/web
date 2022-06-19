@@ -1,5 +1,3 @@
-
-
 function SearchPage () {
     return (
         <span>hi</span>

@@ -84,8 +84,6 @@ function App() {
               "tags": p[ch].tags,
               "title": p[ch].title
             });
-
-            console.log(dbStatus);
         }
       }
     };
@@ -139,8 +137,8 @@ function App() {
     }
   }, []);
 
-  const state = useStore();
-    console.log(state)
+  //const state = useStore();
+  //console.log(state)
 
   return (
     <div>

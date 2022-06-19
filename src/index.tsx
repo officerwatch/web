@@ -2,10 +2,10 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from './App';
 import Contribute from "./routes/contribute";
-import About from "./routes/about";
-import Contact from "./routes/contact";
-import Report from "./routes/report";
-import SearchPage from "./routes/searchpage";
+import Create from "./routes/create";
+import Intake from "./routes/intake";
+import Settings from "./routes/settings";
+import Officers from "./routes/officers";
 import Officer from "./routes/officer";
 
 const root = ReactDOM.createRoot(
@@ -16,9 +16,9 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="contribute" element={<Contribute />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="report" element={<Report />} />
+          <Route path="create" element={<Create />} />
+          <Route path="intake" element={<Intake />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="officer">
             <Route path=":pid" element={<Officer />} />
           </Route>

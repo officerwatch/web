@@ -10420,4 +10420,16 @@ body {
   justify-content: inherit;
 }
 
+button, button:focus, button:active {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  border: 1px solid #888;
+}
+
+button:hover {
+  background-color: rgb(221, 238, 250);
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -33,8 +33,8 @@ export async function connectWallet () {
     return new Promise((resolve, reject) => {
         const walletCall = async () => {
             try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                if (accounts.length === 0) {
+                const accounts: any = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                if (typeof accounts !== "undefined" && accounts.length === 0) {
                     // MetaMask is locked or the user has not connected any accounts
                     reject("MetaMask is locked or no account setup yet.");
                 }
